@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'untitled-5.ui'
+# Form implementation generated from reading ui file 'untitled-6.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -18,12 +18,12 @@ import sys,threading
 from PyQt5.QtCore import *
 import openpyxl
 from openpyxl.utils.dataframe import dataframe_to_rows
-
+from openpyxl.styles import PatternFill
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(609, 611)
+        MainWindow.resize(489, 490)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -31,8 +31,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setMinimumSize(QtCore.QSize(0, 100))
-        self.groupBox.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.groupBox.setMinimumSize(QtCore.QSize(0, 120))
+        self.groupBox.setMaximumSize(QtCore.QSize(16777215, 120))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.groupBox)
@@ -54,6 +54,9 @@ class Ui_MainWindow(object):
         self.toolButton.setFont(font)
         self.toolButton.setObjectName("toolButton")
         self.horizontalLayout.addWidget(self.toolButton)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.pushButton_3 = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_3.setMinimumSize(QtCore.QSize(0, 22))
         self.pushButton_3.setMaximumSize(QtCore.QSize(16777215, 22))
@@ -61,8 +64,14 @@ class Ui_MainWindow(object):
         font.setPointSize(11)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.horizontalLayout_3.addWidget(self.pushButton_3)
+        self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.horizontalLayout_3.addWidget(self.pushButton_4)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pushButton = QtWidgets.QPushButton(self.groupBox)
@@ -73,12 +82,18 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton)
-        self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_5 = QtWidgets.QPushButton(self.groupBox)
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.pushButton_4.setFont(font)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_2.addWidget(self.pushButton_4)
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.horizontalLayout_2.addWidget(self.pushButton_5)
+        self.pushButton_6 = QtWidgets.QPushButton(self.groupBox)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.horizontalLayout_2.addWidget(self.pushButton_6)
         self.pushButton_2 = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_2.setMinimumSize(QtCore.QSize(0, 22))
         self.pushButton_2.setMaximumSize(QtCore.QSize(16777215, 22))
@@ -100,12 +115,13 @@ class Ui_MainWindow(object):
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout_3.addWidget(self.textBrowser)
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
+        self.graphicsView.setMinimumSize(QtCore.QSize(600,400))
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout_3.addWidget(self.graphicsView)
         self.verticalLayout_4.addLayout(self.verticalLayout_3)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 609, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 489, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -121,9 +137,10 @@ class Ui_MainWindow(object):
         self.toolButton.clicked.connect(self.openDirectory)
         self.pushButton.clicked.connect(self.thread_3)
         self.pushButton_3.clicked.connect(self.thread_1)
-        self.pushButton_2.clicked.connect(self.evevt_set)
+        self.pushButton_2.clicked.connect(self.thread_5)
         self.pushButton_4.clicked.connect(self.thread_2)
-
+        self.pushButton_5.clicked.connect(self.thread_4)
+        self.pushButton_6.clicked.connect(self.thread_6)
     def openDirectory(self):  # 打开文件夹（目录）
         global directory  # 将路径定位全局变量，以便于在下载图片里可以直接使用
         directory = QtWidgets.QFileDialog.getOpenFileName(self.toolButton, "选择文件", "")[0]
@@ -131,43 +148,59 @@ class Ui_MainWindow(object):
         self.lineEdit.setText(directory)
 
     def readData(self):
-        global data, name_list
+        global data, name_list,name_count,i
         data = pd.read_excel(directory)
+        data['英语'] = data['英语'].astype('float')
+        data['数学'] = data['数学'].astype('float')
         name_list = data['姓名']
         name_list = list(set(name_list))
+        name_count = len(name_list)
+        i = 0
         self.ms.txt.emit('表格数据已经读取完毕！可以进行下一步！')
         # messagebox.showinfo("提示", '数据已读取完成！')
 
     def delData(self):
-        global new_data, name
+        global new_data
         plt.rcParams['font.sans-serif'] = ["SimHei"]
         plt.rcParams["axes.unicode_minus"] = False
-
-        for name in name_list:
-            data_name = data[data['姓名'] == name]
-            new_data = data_name.reset_index(drop=True)
-            print(name)
-            plt.figure(figsize=(6, 4))
-            plt.plot(new_data.index, new_data['数学'], label='数学')
-            plt.plot(new_data.index, new_data['英语'], label='英语')
-            plt.xlabel('序号', fontsize=10)
-            plt.ylabel('成绩', fontsize=10)
-            plt.legend(fontsize=10)
-            plt.title(name)
-            plt.savefig(f'data.jpg')
-            self.ms.pic.emit(f'data.jpg')
-            event.clear()
-            event.wait()
-        self.ms.txt.emit('已是最后一位同学！')
-
-    def evevt_set(self):
-        event.set()
+        data_name = data[data['姓名'] == name_list[i]]
+        new_data = data_name.reset_index(drop=True)
+        print(name_list[i])
+        plt.figure(figsize=(6, 4))
+        plt.plot(new_data.index, new_data['数学'], label='数学')
+        plt.plot(new_data.index, new_data['英语'], label='英语')
+        plt.xlabel('序号', fontsize=10)
+        plt.ylabel('成绩', fontsize=10)
+        plt.legend(fontsize=10)
+        plt.title(name_list[i])
+        plt.savefig(f'data.jpg')
+        self.ms.pic.emit(f'data.jpg')
 
 
-    def event_save(self):
-        name = directory.split('/')[-1]
+
+
+    def nextName(self):
+        global i
+        i += 1
+        if i <=name_count-1:
+            self.delData()
+        else:
+            i = name_count-1
+            self.ms.txt.emit('已是最后一位同学！')
+    def lastName(self):
+        global i
+        i-=1
+        if i >=0:
+
+            self.delData()
+        else:
+
+            i = 0
+            self.ms.txt.emit('已是第一位同学！')
+    def event_save_red(self):
+        name = name_list[i]
         self.ms.txt.emit(f'提取--{name}，请稍等')
-        excel_name = os.path.join(os.getcwd(), f'提取--{name}')
+        excel_name = os.path.join(os.getcwd(), f'提取--{name}--red.xlsx')
         if not os.path.exists(excel_name):
             workbook = openpyxl.Workbook()
             booksheet = workbook.active
@@ -177,13 +210,41 @@ class Ui_MainWindow(object):
         workbook = openpyxl.load_workbook(excel_name)
         booksheet = workbook.active
         rows = booksheet.max_row
-        for data in dataframe_to_rows(new_data,index=False, header=False):
-            data.insert(0,rows)
+        for data in dataframe_to_rows(new_data, index=False, header=False):
+            data.insert(0, rows)
             booksheet.append(data)
-            rows+=1
+            rows += 1
+        rows = booksheet.max_row
+        cols = booksheet.max_column
+        for r in range(1, rows + 1):
+            for c in range(1, cols + 1):
+                booksheet.cell(r, c).fill = fill_red
         workbook.save(excel_name)
         self.ms.txt.emit(f'提取--{name}已经保存，可以进行下一步！')
+    def event_save_yellow(self):
+        name = name_list[i]
+        self.ms.txt.emit(f'提取--{name}，请稍等')
+        excel_name = os.path.join(os.getcwd(), f'提取--{name}--yellow.xlsx')
+        if not os.path.exists(excel_name):
+            workbook = openpyxl.Workbook()
+            booksheet = workbook.active
+            booksheet.append(['序号', '姓名', '数学', '英语'])
+            workbook.save(excel_name)
 
+        workbook = openpyxl.load_workbook(excel_name)
+        booksheet = workbook.active
+        rows = booksheet.max_row
+        for data in dataframe_to_rows(new_data, index=False, header=False):
+            data.insert(0, rows)
+            booksheet.append(data)
+            rows += 1
+        rows = booksheet.max_row
+        cols = booksheet.max_column
+        for r in range(1,rows+1):
+            for c in range(1,cols+1):
+                booksheet.cell(r,c).fill = fill_yellow
+        workbook.save(excel_name)
+        self.ms.txt.emit(f'提取--{name}已经保存，可以进行下一步！')
     def showData(self, image):
         image1 = cv2.imdecode(np.fromfile(image, dtype=np.uint8), -1)  # 读取爬取的图片
         height = image1.shape[0]  # 图片高度
@@ -199,9 +260,10 @@ class Ui_MainWindow(object):
         self.graphicsView.setScene(self.scene)
         # self.graphicsView.fitInView(jpg)
 
-    def printToGui(self,txt):
+    def printToGui(self, txt):
         self.textBrowser.append(txt)
         self.textBrowser.ensureCursorVisible()
+
     def thread(self):
         t = threading.Thread(target=self.showData)
 
@@ -216,7 +278,16 @@ class Ui_MainWindow(object):
         t.start()
 
     def thread_3(self):
-        t = threading.Thread(target=self.event_save)
+        t = threading.Thread(target=self.event_save_yellow)
+        t.start()
+    def thread_4(self):
+        t = threading.Thread(target=self.event_save_red)
+        t.start()
+    def thread_5(self):
+        t = threading.Thread(target=self.nextName)
+        t.start()
+    def thread_6(self):
+        t = threading.Thread(target=self.lastName)
         t.start()
 
     def retranslateUi(self, MainWindow):
@@ -224,14 +295,18 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.toolButton.setText(_translate("MainWindow", "选择文件"))
         self.pushButton_3.setText(_translate("MainWindow", "读取数据"))
-        self.pushButton.setText(_translate("MainWindow", "保存数据"))
         self.pushButton_4.setText(_translate("MainWindow", "生成图表"))
+        self.pushButton.setText(_translate("MainWindow", "导出并标记黄"))
+        self.pushButton_5.setText(_translate("MainWindow", "导出并标记红"))
+        self.pushButton_6.setText(_translate("MainWindow", "上一位同学"))
         self.pushButton_2.setText(_translate("MainWindow", "下一位同学"))
 class MySignal(QObject):
     pic = pyqtSignal(str,name='graphicsView')
     txt = pyqtSignal(str, name='textBrowser')
 if __name__ == '__main__':
-
+    i = 0
+    fill_yellow = PatternFill("solid", fgColor="ffff33")
+    fill_red = PatternFill("solid", fgColor="ff0033")
     event = threading.Event()
     save_event = threading.Event()
     app = QtWidgets.QApplication(sys.argv)
